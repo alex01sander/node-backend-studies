@@ -1,7 +1,7 @@
 const http = require("http");
 const { URL } = require("url");
 
-const routes = require("./src/routes");
+const routes = require("../routes");
 
 const server = http.createServer((req, res) => {
   const parsedUrl = new URL(`http://localhost:4000${req.url}`);
