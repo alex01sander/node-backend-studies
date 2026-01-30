@@ -9,8 +9,8 @@ module.exports = {
       }
       return a.id > b.id ? 1 : -1;
     });
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify(sorteUsers));
+
+    res.send(200, sorteUsers);
   },
 
   getUserById(req, res) {
@@ -19,11 +19,8 @@ module.exports = {
     const user = users.find((user) => user.id === Number(id));
 
     if (!user) {
-      res.writeHead(404, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ error: "User not found" }));
-    } else {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify(user));
+      return res.send(404, { error: "User not found" });
     }
+    res.send(200, user);
   },
 };
