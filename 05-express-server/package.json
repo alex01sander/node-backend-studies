@@ -1,0 +1,11 @@
+{
+  "name": "05-express-server",
+  "version": "1.0.0",
+  "description": "API to store contacts",
+  "main": "src/index.js",
+  "author": "Alex Britto",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
