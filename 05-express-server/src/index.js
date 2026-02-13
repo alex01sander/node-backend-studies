@@ -3,11 +3,7 @@ const routes = require("./routes");
 
 const app = express();
 
-app.use((req, res) => {
-    req.appId = "MeuAppID";
-    res.send("PAROU NO MIDDLEWARE");
-});
-
+app.use(express.json());
 app.use(routes);
 
 app.listen(3000, () => {
