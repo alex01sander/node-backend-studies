@@ -1,3 +1,4 @@
+const AppError = require("../../errors/AppError");
 const CategoryRepository = require("../repositories/CategoryRepository");
 class CategoryController {
   async index(req, res) {
@@ -8,7 +9,7 @@ class CategoryController {
   async store(req, res) {
     const { name } = req.body;
     if (!name) {
-      return res.status(400).json({ error: "Name is required" });
+      throw new AppError("Name is required", 400);
     }
     const category = await CategoryRepository.create({name});
     res.json(category);

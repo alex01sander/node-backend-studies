@@ -19,4 +19,7 @@ export default defineConfig([
         language: "json/json",
         extends: ["json/recommended"],
     },
+    rules: {
+        "no-unused-vars": ["error", { argsIgnorePattern: "next" }],
+    },
 ]);
