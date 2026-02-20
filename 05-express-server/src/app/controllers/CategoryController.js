@@ -28,6 +28,16 @@ class CategoryController {
         const category = await CategoryRepository.update(id, { name });
         res.json(category);
     }
+
+    async delete(req, res) {
+        const { id } = req.params;
+        const categoryExists = await CategoryRepository.findById(id);
+        if (!categoryExists) {
+            throw new AppError("Category not found", 404);
+        }
+        await CategoryRepository.delete(id);
+        res.sendStatus(204);
+    }
 }
 
 module.exports = new CategoryController();
