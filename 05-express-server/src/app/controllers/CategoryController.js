@@ -1,5 +1,7 @@
 const AppError = require("../../errors/AppError");
 const CategoryRepository = require("../repositories/CategoryRepository");
+const CategoryService = require("../service/CategoryService");
+
 class CategoryController {
     async index(req, res) {
         const categories = await CategoryRepository.findAll();
@@ -8,34 +10,21 @@ class CategoryController {
 
     async store(req, res) {
         const { name } = req.body;
-        if (!name) {
-            throw new AppError("Name is required", 400);
-        }
-        const category = await CategoryRepository.create({ name });
-        res.json(category);
+
+        const category = await CategoryService.createCategory(name);
+        return res.status(201).json(category);
     }
 
     async update(req, res) {
         const { id } = req.params;
         const { name } = req.body;
-        const categoryExists = await CategoryRepository.findById(id);
-        if (!name) {
-            throw new AppError("Name is required", 400);
-        }
-        if (!categoryExists) {
-            throw new AppError("Category not found", 404);
-        }
-        const category = await CategoryRepository.update(id, { name });
-        res.json(category);
+        const category = await CategoryService.updateCategory(id, name);
+        return res.status(200).json(category);
     }
 
     async delete(req, res) {
         const { id } = req.params;
-        const categoryExists = await CategoryRepository.findById(id);
-        if (!categoryExists) {
-            throw new AppError("Category not found", 404);
-        }
-        await CategoryRepository.delete(id);
+        await CategoryService.deleteCategory(id);
         res.sendStatus(204);
     }
 }
