@@ -1,4 +1,5 @@
 const ContactsRepository = require("../repositories/ContactsRepository");
+const CategoryRepository = require("../repositories/CategoryRepository");
 
 const AppError = require("../../errors/AppError");
 
