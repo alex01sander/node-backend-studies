@@ -19,6 +19,9 @@ class CategoryController {
         const { id } = req.params;
         const { name } = req.body;
         const categoryExists = await CategoryRepository.findById(id);
+        if (!name) {
+            throw new AppError("Name is required", 400);
+        }
         if (!categoryExists) {
             throw new AppError("Category not found", 404);
         }
